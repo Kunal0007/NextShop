@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import {AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle} from 'react-icons/ai'
 import Image from 'next/Image'
 import Script from 'next/script'
 import Link from 'next/link'
@@ -17,7 +18,19 @@ const Navbar = () => {
         }
     }
 
+    const cartToggle = () => {
+        if(refcart.current.classList.contains('translate-x-full')){
+            refcart.current.classList.remove('translate-x-full');
+            refcart.current.classList.add('translate-x-0');
+        }
+        else if(!refcart.current.classList.contains('translate-x-full')){
+            refcart.current.classList.remove('translate-x-0');
+            refcart.current.classList.add('translate-x-full');
+        }
+    }
+
     const ref = useRef();
+    const refcart = useRef();
 
     return (
         <div>
@@ -75,8 +88,8 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            <button type="button" className="bg-white-800 p-1.5 rounded-full text-black-400 hover:text-black hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                                <span className="sr-only">View notifications</span>
+                            <button type="button" onClick={cartToggle} className="bg-white-800 p-1.5 rounded-full text-black-400 hover:text-black hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                <span className="sr-only">View Cart</span>
                                 {/* <!-- Heroicon name: outline/bell --> */}
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -127,8 +140,43 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <div className='cart absolute top-0 right-0' >
-                    <h2>Shopping Cart</h2>
+                <div ref={refcart} className='cart pl-7 pr-16 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
+                    <h2 className='text-2xl font-medium my-2'>Shopping Cart</h2>
+                    <span onClick={cartToggle} className='absolute top-3 right-3 text-xl cursor-pointer'><AiFillCloseCircle/></span>
+                    <div className='cart-items my-4'>
+                        <ol className='font-semibold flex-col'>
+                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
+                                <span>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 text-right'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                            </li>
+                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
+                                <span>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 text-right'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                            </li>
+                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
+                                <span>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 text-right'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                            </li>
+                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
+                                <span>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 text-right'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                            </li>
+                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
+                                <span>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 text-right'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                            </li>
+                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
+                                <span>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 text-right'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
             </nav>
 
