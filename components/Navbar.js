@@ -140,40 +140,40 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <div ref={refcart} className='cart pl-7 pr-16 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
+                <div ref={refcart} className='cart pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
                     <h2 className='text-2xl font-medium my-2'>Shopping Cart</h2>
                     <span onClick={cartToggle} className='absolute top-3 right-3 text-xl cursor-pointer'><AiFillCloseCircle/></span>
                     <div className='cart-items my-4'>
                         <ol className='font-semibold flex-col'>
                             <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 text-right'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
                             </li>
                             <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 text-right'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
                             </li>
                             <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 text-right'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
                             </li>
                             <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 text-right'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
                             </li>
                             <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 text-right'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
                             </li>
                             <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 text-right'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle /> 1 <AiOutlinePlusCircle /> </div>
+                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
+                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
+                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
                             </li>
                         </ol>
                     </div>
