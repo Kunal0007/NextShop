@@ -1,12 +1,9 @@
 import React, { useRef } from 'react'
-import {AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle} from 'react-icons/ai'
-import Image from 'next/Image'
-import Script from 'next/script'
+import { AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
 import Link from 'next/link'
-import { Ref } from 'react'
 
-const Navbar = () => {
-
+const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
+    
     const navbarToggle = () => {
         if (ref.current.classList.contains('hidden')) {
             ref.current.classList.remove('hidden');
@@ -19,11 +16,11 @@ const Navbar = () => {
     }
 
     const cartToggle = () => {
-        if(refcart.current.classList.contains('translate-x-full')){
+        if (refcart.current.classList.contains('translate-x-full')) {
             refcart.current.classList.remove('translate-x-full');
             refcart.current.classList.add('translate-x-0');
         }
-        else if(!refcart.current.classList.contains('translate-x-full')){
+        else if (!refcart.current.classList.contains('translate-x-full')) {
             refcart.current.classList.remove('translate-x-0');
             refcart.current.classList.add('translate-x-full');
         }
@@ -140,41 +137,38 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <div ref={refcart} className='cart pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
+                <div ref={refcart} className='cart z-10 pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
                     <h2 className='text-2xl font-medium my-2'>Shopping Cart</h2>
-                    <span onClick={cartToggle} className='absolute top-3 right-3 text-xl cursor-pointer'><AiFillCloseCircle/></span>
+                    <span onClick={cartToggle} className='absolute top-3 right-3 text-xl cursor-pointer'><AiFillCloseCircle /></span>
                     <div className='cart-items my-4'>
                         <ol className='font-semibold flex-col'>
-                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
-                            </li>
-                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
-                            </li>
-                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
-                            </li>
-                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
-                            </li>
-                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
-                            </li>
-                            <li className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                <span className='border-r-2 pr-2 border-gray-300'>T-shirts: ucgcdhg</span>
-                                <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>₹499</span>
-                                <div className='flex items-center'> <AiOutlineMinusCircle className='mr-2' /> 1 <AiOutlinePlusCircle className='ml-2'/> </div>
-                            </li>
+                            {Object.keys(cart).map((item, index) => {
+                                return (
+                                    <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
+                                        <span className='border-r-2 pr-2 border-gray-300'>{cart[item].itemName}</span>
+                                        <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>{cart[item].itemPrice}</span>
+                                        <div className='flex items-center'> 
+                                            <AiOutlineMinusCircle className='mr-2 cursor-pointer'
+                                                onClick={() => { 
+                                                    removefromCart(item, 
+                                                    cart[item].itemName, 
+                                                    cart[item].itemPrice, 
+                                                    1) 
+                                                }}
+                                             /> 
+                                               <span>{cart[item].itemQty}</span> 
+                                            <AiOutlinePlusCircle className='ml-2 cursor-pointer' 
+                                                onClick={() => { 
+                                                    addtoCart(item, 
+                                                    cart[item].itemName, 
+                                                    cart[item].itemPrice, 
+                                                    1) 
+                                                }} /> 
+                                        </div>
+                                    </li>
+                                )
+                            })}
+
                         </ol>
                     </div>
                 </div>
