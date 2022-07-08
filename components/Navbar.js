@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import { AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
-import Link from 'next/link'
+import Link from 'next/Link'
 
 const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
-    
+
     const navbarToggle = () => {
         if (ref.current.classList.contains('hidden')) {
             ref.current.classList.remove('hidden');
@@ -31,7 +31,7 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
 
     return (
         <div>
-            <nav className="bg-white-800 shadow-md">
+            <nav className="bg-white-800 shadow-md sticky z-10">
                 <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                     <div className="relative flex items-center justify-between h-16">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -137,33 +137,34 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
                     </div>
                 </div>
 
-                <div ref={refcart} className='cart z-10 pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
+                <div ref={refcart} className='cart h-[100vh] pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
                     <h2 className='text-2xl font-medium my-2'>Shopping Cart</h2>
                     <span onClick={cartToggle} className='absolute top-3 right-3 text-xl cursor-pointer'><AiFillCloseCircle /></span>
                     <div className='cart-items my-4'>
                         <ol className='font-semibold flex-col'>
+                            {Object.keys(cart).length == 0 && <div className='text-center p-2 text-lg bg-gray-100 my-2 rounded-md'>No items in cart</div>}
                             {Object.keys(cart).map((item, index) => {
                                 return (
                                     <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
                                         <span className='border-r-2 pr-2 border-gray-300'>{cart[item].itemName}</span>
                                         <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>{cart[item].itemPrice}</span>
-                                        <div className='flex items-center'> 
+                                        <div className='flex items-center'>
                                             <AiOutlineMinusCircle className='mr-2 cursor-pointer'
-                                                onClick={() => { 
-                                                    removefromCart(item, 
-                                                    cart[item].itemName, 
-                                                    cart[item].itemPrice, 
-                                                    1) 
+                                                onClick={() => {
+                                                    removefromCart(item,
+                                                        cart[item].itemName,
+                                                        cart[item].itemPrice,
+                                                        1)
                                                 }}
-                                             /> 
-                                               <span>{cart[item].itemQty}</span> 
-                                            <AiOutlinePlusCircle className='ml-2 cursor-pointer' 
-                                                onClick={() => { 
-                                                    addtoCart(item, 
-                                                    cart[item].itemName, 
-                                                    cart[item].itemPrice, 
-                                                    1) 
-                                                }} /> 
+                                            />
+                                            <span>{cart[item].itemQty}</span>
+                                            <AiOutlinePlusCircle className='ml-2 cursor-pointer'
+                                                onClick={() => {
+                                                    addtoCart(item,
+                                                        cart[item].itemName,
+                                                        cart[item].itemPrice,
+                                                        1)
+                                                }} />
                                         </div>
                                     </li>
                                 )
@@ -171,9 +172,14 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
 
                         </ol>
                     </div>
+                    <div className='flex'>
+                        <Link href={'/checkout'}>
+                            <button disabled={!Object.keys(cart).length} className="flex text-white bg-indigo-500 border-0 py-2 px-4 mr-2 focus:outline-none hover:bg-indigo-600 rounded">Checkout</button>
+                        </Link>
+                        <button onClick={clearCart} className="flex text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">Clear Cart</button>
+                    </div>
                 </div>
             </nav>
-
         </div>
     )
 }
