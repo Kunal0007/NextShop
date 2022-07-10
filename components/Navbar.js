@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
+import { AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineUser} from 'react-icons/ai'
 import Link from 'next/Link'
 
 const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
@@ -36,7 +36,7 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
                     <div className="relative flex items-center justify-between h-16">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                             {/* <!-- Mobile menu button--> */}
-                            <button onClick={navbarToggle} type="button" className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" id='navbutton' aria-controls="mobile-menu" aria-expanded="false">
+                            <button onClick={navbarToggle} type="button" className="inline-flex items-center justify-center p-2 rounded-md hover:text-black hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" id='navbutton' aria-controls="mobile-menu" aria-expanded="false">
                                 <span className="sr-only">Open main menu</span>
                                 {/* <!--
                                 Icon when menu is closed.
@@ -93,30 +93,15 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
                                 </svg>
                             </button>
 
-                            {/* <!-- Profile dropdown --> */}
+                            {/* <!-- Login Page --> */}
                             <div className="ml-3 relative">
                                 <div>
-                                    <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                        <span className="sr-only">Open user menu</span>
-                                        <img className="h-8 w-8 rounded-full" src="https://Images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                    <Link href={'/login'}>
+                                    <button type="button" className="flex p-1.5 text-sm rounded-full  hover:text-black hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="login-button" aria-expanded="false" aria-haspopup="true">
+                                        <span className="sr-only">User login</span>
+                                        <AiOutlineUser className="h-6 w-6" />
                                     </button>
-                                </div>
-                                {/* 
-                                    <!--
-                                    Dropdown menu, show/hide based on menu state.
-
-                                    Entering: "transition ease-out duration-100"
-                                    From: "transform opacity-0 scale-95"
-                                    To: "transform opacity-100 scale-100"
-                                    Leaving: "transition ease-in duration-75"
-                                    From: "transform opacity-100 scale-100"
-                                    To: "transform opacity-0 scale-95"
-          --> */}
-                                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                                    {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</a>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</a>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Sign out</a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -125,19 +110,31 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
 
                 {/* <!-- Mobile menu, show/hide based on menu state. --> */}
                 <div ref={ref} className="t hidden" id="mobile-menu">
-                    <div className="px-2 pt-2 pb-3 space-y-1">
+                    <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-900">
                         {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:text-black hover:bg-slate-200" --> */}
-                        <a href="#" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
+                        <Link href={'/'}>
+                            <a className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
+                        </Link>
 
-                        <a href="#" className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Team</a>
+                        <Link href={'/tshirts'}>
+                            <a className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">T-Shirts</a>
+                        </Link>
 
-                        <a href="#" className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                        <Link href={'/causalwear'}>
+                            <a className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Causal wear</a>
+                        </Link>
 
-                        <a href="#" className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+                        <Link href={'/footwear'}>
+                            <a className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Footer wear</a>
+                        </Link>
+                        
+                        <Link href={'/watchesAcs'}>
+                            <a className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Watches & Accessories</a>
+                        </Link>
                     </div>
                 </div>
 
-                <div ref={refcart} className='cart h-[100vh] pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full' >
+                <div ref={refcart} className={`cart h-[100vh] pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'} `} >
                     <h2 className='text-2xl font-medium my-2'>Shopping Cart</h2>
                     <span onClick={cartToggle} className='absolute top-3 right-3 text-xl cursor-pointer'><AiFillCloseCircle /></span>
                     <div className='cart-items my-4'>
@@ -147,7 +144,7 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
                                 return (
                                     <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
                                         <span className='border-r-2 pr-2 border-gray-300'>{cart[item].itemName}</span>
-                                        <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>{cart[item].itemPrice}</span>
+                                        <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>{cart[item].subTotal}</span>
                                         <div className='flex items-center'>
                                             <AiOutlineMinusCircle className='mr-2 cursor-pointer'
                                                 onClick={() => {
