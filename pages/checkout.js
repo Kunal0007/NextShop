@@ -42,10 +42,10 @@ const checkout = ({cart, addtoCart, removefromCart, clearCart, cartTotal}) => {
                 </div>
             </div>
             <h2 className='font-semibold'>2.Review Cart Items</h2>
-            <div className='cart pl-7 pr-7 py-10 bg-gray-200' >
+            <div className='cart px-5 sm:px-7 py-10 bg-gray-200' >
                     <div className='cart-items my-4'>
-                        <div className='p-2 text-lg border-b-2 border-gray-600 my-2 flex justify-around'>
-                            <h3 className='font-semibold'>Product</h3>
+                        <div className='p-2 text-lg border-b-2 border-gray-600 my-2 flex justify-around text-center'>
+                            <h3 className='font-semibold basis-1/4'>Product</h3>
                             <h3 className='font-semibold hidden md:block'>Price</h3>
                             <h3 className='font-semibold'>Quantity</h3>
                             <h3 className='font-semibold'>Total</h3>
@@ -54,8 +54,8 @@ const checkout = ({cart, addtoCart, removefromCart, clearCart, cartTotal}) => {
                             {Object.keys(cart).length == 0 && <div className='text-center p-2 text-lg bg-gray-100 my-2 rounded-md'>No items in cart</div>}
                             {Object.keys(cart).map((item, index) => {
                                 return (
-                                    <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex justify-around'>
-                                        <span className=''>{cart[item].itemName}</span>
+                                    <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex justify-around text-center'>
+                                        <span className='basis-1/4'>{cart[item].itemName}</span>
                                         <span className='hidden md:block'>{cart[item].itemPrice}</span>                                        
                                         <div className='flex items-center'>
                                             <AiOutlineMinusCircle className='mr-2 cursor-pointer'
