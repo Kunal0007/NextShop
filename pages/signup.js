@@ -1,9 +1,56 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Link from 'next/Link'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [cpassword, setCPassword] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let data = { name, email, password }
+        let res = await fetch('http://localhost:3000/api/signup', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        let response = await res.json();
+        // console.log(response);
+        setName('');
+        setEmail('');
+        setPassword('');
+        setCPassword('');
+        toast.success('🦄Your Account has been Created!', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
     return (
         <div className='container px-7 sm:px-24 py-14 mx-auto'>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md w-full space-y-8">
                     <div>
@@ -22,29 +69,33 @@ const Signup = () => {
                             </Link>
                         </p>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form onSubmit={handleSubmit} className="mt-8 space-y-6" method="POST">
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
-                                <label htmlFor="email-address" className="sr-only">
+                                <label htmlFor="name" className="sr-only">
                                     Full Name
                                 </label>
                                 <input
-                                    id="email-address"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
+                                    onChange={(e) => setName(e.target.value)}
+                                    value={name}
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    autoComplete="name"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Full Name"
                                 />
                             </div>
                             <div>
-                                <label htmlFor="email-address" className="sr-only">
+                                <label htmlFor="email" className="sr-only">
                                     Email address
                                 </label>
                                 <input
-                                    id="email-address"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                    id="email"
                                     name="email"
                                     type="email"
                                     autoComplete="email"
@@ -54,14 +105,16 @@ const Signup = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="email-address" className="sr-only">
+                                <label htmlFor="password" className="sr-only">
                                     Password
                                 </label>
                                 <input
-                                    id="email-address"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password}
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    autoComplete="password"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Password"
@@ -69,16 +122,18 @@ const Signup = () => {
                             </div>
                             <div>
                                 <label htmlFor="password" className="sr-only">
-                                    Create Password
+                                    Confirm Password
                                 </label>
                                 <input
-                                    id="password"
-                                    name="password"
+                                    onChange={(e) => setCPassword(e.target.value)}
+                                    value={cpassword}
+                                    id="cpassword"
+                                    name="cpassword"
                                     type="password"
-                                    autoComplete="current-password"
+                                    autoComplete="confirm-password"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Create Password"
+                                    placeholder="Confirm Password"
                                 />
                             </div>
                         </div>
