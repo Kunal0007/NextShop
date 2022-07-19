@@ -1,8 +1,10 @@
-import React, { useRef } from 'react'
-import { AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineUser} from 'react-icons/ai'
+import React, { useRef, useState } from 'react'
+import { AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineUser } from 'react-icons/ai'
 import Link from 'next/Link'
 
-const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
+const Navbar = ({ user, cart, saveCart, addtoCart, removefromCart, clearCart, logout }) => {
+
+    const [dropdown, setDropdown] = useState(false);
 
     const navbarToggle = () => {
         if (ref.current.classList.contains('hidden')) {
@@ -94,15 +96,23 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
                             </button>
 
                             {/* <!-- Login Page --> */}
-                            <div className="ml-3 relative">
+                            <div className="ml-3 relative cursor-pointer">
                                 <div>
-                                    <Link href={'/login'}>
-                                    <button type="button" className="flex p-1.5 text-sm rounded-full  hover:text-black hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="login-button" aria-expanded="false" aria-haspopup="true">
-                                        <span className="sr-only">User login</span>
-                                        <AiOutlineUser className="h-6 w-6" />
-                                    </button>
-                                    </Link>
+                                    <a onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
+                                        {user.value && <AiOutlineUser className="h-6 w-6" />}
+                                    </a>                                    
+                                    {!user.value && <Link href={'/login'}>
+                                        <button type="button" className="flex p-1.5 text-md rounded-md font-semibold hover:text-black hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="login-button" aria-expanded="false" aria-haspopup="true">
+                                            <span className="sr-only">User login</span>
+                                            Login
+                                        </button>
+                                    </Link>}
                                 </div>
+                                {dropdown && <div onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)} className="origin-top-right absolute right-0 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">                                    
+                                    <Link href={'/account'}><a className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-200" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</a></Link>
+                                    <Link href={'/orders'}><a className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-200" role="menuitem" tabIndex="-1" id="user-menu-item-1">Order</a></Link>
+                                    <a onClick={logout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-200" role="menuitem" tabIndex="-1" id="user-menu-item-2">Sign out</a>
+                                </div>}
                             </div>
                         </div>
                     </div>
@@ -127,14 +137,14 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
                         <Link href={'/footwear'}>
                             <a className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Footer wear</a>
                         </Link>
-                        
+
                         <Link href={'/watchesAcs'}>
                             <a className="text-gray-300 hover:text-black hover:bg-slate-200 block px-3 py-2 rounded-md text-base font-medium">Watches & Accessories</a>
                         </Link>
                     </div>
                 </div>
 
-                <div ref={refcart} className={`cart h-[100vh] pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'} `} >
+                <div ref={refcart} className={`cart h-[100vh] pl-7 pr-7 py-10 bg-gray-200 absolute top-0 right-0 transform transition-transform translate-x-full`} >
                     <h2 className='text-2xl font-medium my-2'>Shopping Cart</h2>
                     <span onClick={cartToggle} className='absolute top-3 right-3 text-xl cursor-pointer'><AiFillCloseCircle /></span>
                     <div className='cart-items my-4'>
@@ -142,27 +152,29 @@ const Navbar = ({ cart, saveCart, addtoCart, removefromCart, clearCart }) => {
                             {Object.keys(cart).length == 0 && <div className='text-center p-2 text-lg bg-gray-100 my-2 rounded-md'>No items in cart</div>}
                             {Object.keys(cart).map((item, index) => {
                                 return (
-                                    <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex'>
-                                        <span className='border-r-2 pr-2 border-gray-300'>{cart[item].itemName}</span>
-                                        <span className='mx-2 pr-2 text-right border-r-2 border-gray-300'>{cart[item].subTotal}</span>
-                                        <div className='flex items-center'>
-                                            <AiOutlineMinusCircle className='mr-2 cursor-pointer'
-                                                onClick={() => {
-                                                    removefromCart(item,
-                                                        cart[item].itemName,
-                                                        cart[item].itemPrice,
-                                                        1)
-                                                }}
-                                            />
-                                            <span>{cart[item].itemQty}</span>
-                                            <AiOutlinePlusCircle className='ml-2 cursor-pointer'
-                                                onClick={() => {
-                                                    addtoCart(item,
-                                                        cart[item].itemName,
-                                                        cart[item].itemPrice,
-                                                        1)
-                                                }} />
-                                        </div>
+                                    <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex flex-col'>
+                                        <span className='border-b-2 pr-2 border-gray-300 text-center'>{cart[item].itemName}</span>
+                                        <div className='flex'>
+                                            <span className='mx-2 pr-2 w-1/2 text-center border-r-2 border-gray-300'>{cart[item].subTotal}</span>
+                                            <div className='flex items-center justify-center w-1/2'>
+                                                <AiOutlineMinusCircle className='mr-2 cursor-pointer'
+                                                    onClick={() => {
+                                                        removefromCart(item,
+                                                            cart[item].itemName,
+                                                            cart[item].itemPrice,
+                                                            1)
+                                                    }}
+                                                />
+                                                <span>{cart[item].itemQty}</span>
+                                                <AiOutlinePlusCircle className='ml-2 cursor-pointer'
+                                                    onClick={() => {
+                                                        addtoCart(item,
+                                                            cart[item].itemName,
+                                                            cart[item].itemPrice,
+                                                            1)
+                                                    }} />
+                                            </div></div>
+
                                     </li>
                                 )
                             })}
