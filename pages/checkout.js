@@ -54,7 +54,7 @@ const checkout = ({cart, addtoCart, removefromCart, clearCart, cartTotal}) => {
                             {Object.keys(cart).length == 0 && <div className='text-center p-2 text-lg bg-gray-100 my-2 rounded-md'>No items in cart</div>}
                             {Object.keys(cart).map((item, index) => {
                                 return (
-                                    <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex justify-around text-center'>
+                                    <li key={index} className='p-2 text-lg bg-gray-100 my-2 rounded-md flex justify-around text-center items-center'>
                                         <span className='basis-1/4'>{cart[item].itemName}</span>
                                         <span className='hidden md:block'>{cart[item].itemPrice}</span>                                        
                                         <div className='flex items-center'>
@@ -84,7 +84,7 @@ const checkout = ({cart, addtoCart, removefromCart, clearCart, cartTotal}) => {
                     </div>
                     <div className='text-end my-2'><h3 className='font-semibold text-xl'>Grand Total : ₹ {cartTotal}</h3></div>
                     <div className='flex justify-end'>
-                        <button onClick={clearCart} className="flex text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">Order Now</button>
+                        <button className="flex text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">Order Now</button>
                     </div>
                 </div>
         </div>
