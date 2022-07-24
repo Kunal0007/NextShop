@@ -1,9 +1,78 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from 'next/Link'
+import { useRouter } from 'next/router';
+import React, {useState} from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 const Login = () => {
+
+    const router = useRouter();
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        if(localStorage.getItem('token')){
+            router.push('/');
+        }
+    }, [])
+    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let data = {email, password}
+        let res = await fetch('http://localhost:3000/api/login',{
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        let response = await res.json();
+        setEmail('')
+        setPassword('')
+        if(response.success){            
+            localStorage.setItem('token', response.token);
+            toast.success('🦄 User Logged In Successfully', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            setTimeout(() => {
+                router.push('http://localhost:3000/')
+            }, 1000);
+        }
+        else {
+            toast.error(response.message, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }
+
     return (
         <div className='container px-7 sm:px-24 py-14 mx-auto'>
+        <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md w-full space-y-8">
                     <div>
@@ -22,7 +91,7 @@ const Login = () => {
                             </Link>
                         </p>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form onSubmit={handleSubmit} className="mt-8 space-y-6" method="POST">
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -30,6 +99,8 @@ const Login = () => {
                                     Email address
                                 </label>
                                 <input
+                                    onChange={(e) => {setEmail(e.target.value)}}
+                                    value={email}
                                     id="email-address"
                                     name="email"
                                     type="email"
@@ -44,6 +115,8 @@ const Login = () => {
                                     Password
                                 </label>
                                 <input
+                                    onChange={(e) => {setPassword(e.target.value)}}
+                                    value={password}
                                     id="password"
                                     name="password"
                                     type="password"
