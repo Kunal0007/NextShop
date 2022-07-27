@@ -1,8 +1,15 @@
 import React from 'react'
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
+import StripeCheckout from 'react-stripe-checkout';
 
 
 const checkout = ({cart, addtoCart, removefromCart, clearCart, cartTotal}) => {
+
+    const onToken = (token) => {
+        console.log(token)
+        alert('Payment Successful')
+    }
+
     return (
         <div className='container px-7 sm:px-24 pb-14 mx-auto'>
             <h1 className='text-center font-bold text-3xl my-10'>Checkout</h1>
@@ -84,7 +91,17 @@ const checkout = ({cart, addtoCart, removefromCart, clearCart, cartTotal}) => {
                     </div>
                     <div className='text-end my-2'><h3 className='font-semibold text-xl'>Grand Total : ₹ {cartTotal}</h3></div>
                     <div className='flex justify-end'>
-                        <button className="flex text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">Order Now</button>
+                        <StripeCheckout
+                            name='NextShop'
+                            description='Pay for your order'
+                            amount={cartTotal * 100}                            
+                            image='https://stripe.com/img/documentation/checkout/marketplace.png'
+                            currency='INR'
+                            stripeKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+                            token={onToken}
+                        >
+                            <button className="flex text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">Order Now</button>
+                        </StripeCheckout>
                     </div>
                 </div>
         </div>
