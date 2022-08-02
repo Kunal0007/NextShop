@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/Link'
+import Link from 'next/link'
 import mongoose from 'mongoose'
 import Product from '../models/product'
 
@@ -37,7 +37,7 @@ const Causalwear = ({ products }) => {
 export async function getServerSideProps(context) {
 
   if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URI)
+    await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URI)
   }
 
   const products = await Product.find({ category: 'Casual-Wear' });
