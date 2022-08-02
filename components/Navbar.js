@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineUser } from 'react-icons/ai'
-import Link from 'next/Link'
+import Link from 'next/link'
 
 const Navbar = ({ user, cart, saveCart, addtoCart, removefromCart, clearCart, logout }) => {
 
