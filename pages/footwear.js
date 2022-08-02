@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/Link'
+import Link from 'next/link'
 import mongoose from 'mongoose'
 import Product from '../models/product'
 
