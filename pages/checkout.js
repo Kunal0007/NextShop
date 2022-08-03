@@ -10,6 +10,7 @@ const checkout = ({cart, addtoCart, removefromCart, clearCart, cartTotal}) => {
         alert('Payment Successful')
     }
 
+    
     return (
         <div className='container px-7 sm:px-24 pb-14 mx-auto'>
             <h1 className='text-center font-bold text-3xl my-10'>Checkout</h1>
