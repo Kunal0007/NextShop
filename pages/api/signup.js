@@ -4,10 +4,10 @@ import CryptoJS from 'crypto-js';
 
 const handler = async (req, res) => {
     if (req.method === "POST") {
-        const { name, email} = req.body;
+        const { name, email, cart} = req.body;
         // Encrypt
         let ciphertext = CryptoJS.AES.encrypt(req.body.password, 'secret0007').toString();
-        let user = new User({ name, email, password: ciphertext });
+        let user = new User({ name, email, password: ciphertext, cart });
         await user.save();
         res.status(200).json({ message: "User account created successfully" });
     }
