@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import LoadingBar from 'react-top-loading-bar'
 import '../styles/globals.css'
+import User from "../models/user";
+import jwt from "jsonwebtoken";
 
 function MyApp({ Component, pageProps }) {
 
   const [cart, setCart] = useState({});
   const [cartTotal, setCartTotal] = useState(0);
-  const [user, setUser] = useState({value: null});
+  const [user, setUser] = useState({ value: null });
   const [key, setKey] = useState(0);
   const [progress, setProgress] = useState(0)
   const router = useRouter();
@@ -22,6 +24,7 @@ function MyApp({ Component, pageProps }) {
     router.events.on('routeChangeComplete', () => {
       setProgress(100);
     })
+    const token = localStorage.getItem("token");
     try {
       if (localStorage.getItem("cart")) {
         setCart(JSON.parse(localStorage.getItem("cart")));
@@ -31,7 +34,6 @@ function MyApp({ Component, pageProps }) {
       console.error(error);
       localStorage.clear();
     }
-    const token = localStorage.getItem("token");
     if (token) {
       setUser({ value: token });
       setKey(Math.random());
@@ -56,7 +58,12 @@ function MyApp({ Component, pageProps }) {
     setCartTotal(total);
   }
 
-  const addtoCart = (itemCode, itemName, itemPrice, itemQty) => {
+  const addtoCart = async (itemCode, itemName, itemPrice, itemQty) => {
+    const token = localStorage.getItem("token");
+    var decoded = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET);
+    console.log(decoded.email);
+    let user = await User.findOne({ email: decoded.email });
+    console.log(user);
     console.log("adding to cart");
     let newCart = cart;
     let subTotal = itemPrice;
@@ -75,6 +82,7 @@ function MyApp({ Component, pageProps }) {
     }
     setCart(newCart);
     saveCart(newCart);
+    // user.updateOne({cart: newCart});
   }
 
   const buyNow = (itemCode, itemName, itemPrice, itemQty) => {
