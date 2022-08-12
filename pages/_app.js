@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import LoadingBar from 'react-top-loading-bar'
 import '../styles/globals.css'
-import User from "../models/user";
-import jwt from "jsonwebtoken";
 
 function MyApp({ Component, pageProps }) {
 
@@ -59,11 +57,6 @@ function MyApp({ Component, pageProps }) {
   }
 
   const addtoCart = async (itemCode, itemName, itemPrice, itemQty) => {
-    const token = localStorage.getItem("token");
-    var decoded = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET);
-    console.log(decoded.email);
-    let user = await User.findOne({ email: decoded.email });
-    console.log(user);
     console.log("adding to cart");
     let newCart = cart;
     let subTotal = itemPrice;

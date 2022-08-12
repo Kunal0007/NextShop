@@ -13,14 +13,15 @@ const Signup = () => {
     const [cpassword, setCPassword] = useState('')
 
     useEffect(() => {
-        if(localStorage.getItem('token')){
+        if (localStorage.getItem('token')) {
             router.push('/');
         }
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let data = { name, email, password }
+        let cart = { "Women-Heels-3": { "itemCode": "Women-Heels-3", "itemName": "Women Heels Sandal(Black/M)", "itemPrice": 599, "itemQty": 1, "subTotal": 599 } };
+        let data = { name, email, password, cart };
         let res = await fetch('http://localhost:3000/api/signup', {
             method: 'POST', // or 'PUT'
             headers: {

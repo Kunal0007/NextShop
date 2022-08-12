@@ -11,7 +11,7 @@ const handler = async (req, res) => {
             let bytes = CryptoJS.AES.decrypt(user.password, process.env.NEXT_PUBLIC_SECRET_KEY);
             let decryptedData = bytes.toString(CryptoJS.enc.Utf8);
             if (decryptedData == req.body.password) {
-                let token = jwt.sign({email: user.email, name: user.name}, process.env.NEXT_PUBLIC_JWT_SECRET, {expiresIn: "2d"});
+                let token = jwt.sign({email: user.email, name: user.name, cart: user.cart}, process.env.NEXT_PUBLIC_JWT_SECRET, {expiresIn: "2d"});                
                 res.status(200).json({ message: "User Logged In", success: true, token: token });
             }
             else {
