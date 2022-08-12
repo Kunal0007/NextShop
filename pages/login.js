@@ -22,7 +22,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let data = {email, password}
-        let res = await fetch('http://localhost:3000/api/login',{
+        let res = await fetch('/api/login',{
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const Login = () => {
                 progress: undefined,
             });
             setTimeout(() => {
-                router.push('http://localhost:3000/')
+                router.push('/')
             }, 1000);
         }
         else {
