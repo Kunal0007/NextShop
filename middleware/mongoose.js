@@ -5,7 +5,11 @@ const connectDB = handler => async (req, res) => {
         return handler(req, res);
     }
 
-    await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URI)
+    await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URI, {
+        useUnifiedTopology:true,
+        useNewUrlParser: true,
+        useCreateIndex: true
+    })
     return handler(req, res);
 }
 
