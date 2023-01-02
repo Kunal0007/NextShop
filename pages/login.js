@@ -22,7 +22,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let data = {email, password}
-        let res = await fetch('/api/login',{
+        let res = await fetch(`/api/login`,{
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
