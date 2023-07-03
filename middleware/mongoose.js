@@ -8,7 +8,7 @@ const connectDB = handler => async (req, res) => {
     await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URI, {
         useUnifiedTopology:true,
         useNewUrlParser: true,
-        useCreateIndex: true
+        // useCreateIndex: true
     })
     return handler(req, res);
 }
