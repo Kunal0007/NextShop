@@ -2,7 +2,6 @@
 
 A modern, full-stack e-commerce platform built with **Next.js**, featuring server-side rendering, secure JWT authentication, Stripe payments, and a clean responsive UI.
 
-🔗 **Live Demo:** [next-shop-bay.vercel.app](https://next-shop-bay.vercel.app)
 
 ---
 
