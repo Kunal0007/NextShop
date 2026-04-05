@@ -1,62 +1,115 @@
-# NextShop
+# 🛍️ NextShop
 
-NextShop is a modern e-commerce platform that allows users to shop for a variety of products seamlessly. This project aims to provide a user-friendly and efficient shopping experience for customers, using the latest technologies and practices.
+A modern, full-stack e-commerce platform built with **Next.js**, featuring server-side rendering, secure JWT authentication, Stripe payments, and a clean responsive UI.
 
-## Features
-- User registration and authentication
-- Product browsing and searching
-- Shopping cart functionality
-- Order management and checkout process
-- Admin dashboard for product management
-- Responsive design for mobile and desktop users
+🔗 **Live Demo:** [next-shop-bay.vercel.app](https://next-shop-bay.vercel.app)
 
-## Tech Stack
-- **Frontend:** Next.js, React, CSS (Tailwind or Bootstrap)
-- **Backend:** Node.js, Express
-- **Database:** MongoDB or PostgreSQL
-- **Hosting:** Vercel for frontend, Heroku for backend
-- **Version Control:** Git and GitHub
+---
 
-## Setup Instructions
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Kunal0007/NextShop.git
-   ```
-2. **Navigate to the project directory:**
-   ```bash
-   cd NextShop
-   ```
-3. **Install dependencies:**
-   For the frontend:
-   ```bash
-   npm install
-   ```
-   For the backend:
-   (navigate to the backend directory if applicable)
-   ```bash
-   npm install
-   ```
-4. **Run the application:**
-   For the frontend:
-   ```bash
-   npm run dev
-   ```
-   For the backend:
-   (navigate to the backend directory if applicable)
-   ```bash
-   node server.js
-   ```
-5. **Open your browser and navigate to** `http://localhost:3000` for the frontend.
+## ✨ Features
 
-## Project Structure
+- 🔐 **User Authentication** — Secure registration & login with JWT + crypto-js
+- 🛒 **Shopping Cart** — Add, remove, and manage cart items with persistent state
+- 📦 **Product Catalog** — Browse and search products with dynamic routing
+- 💳 **Stripe Checkout** — Secure payment processing with order creation & invoicing
+- 📋 **Order Management** — Track and manage orders post-checkout
+- 🔔 **Toast Notifications** — Real-time feedback using react-toastify
+- 📊 **Loading Indicators** — Smooth page transitions with react-top-loading-bar
+- 📱 **Responsive Design** — Fully optimized for mobile and desktop
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Tech |
+|---|---|
+| Frontend | Next.js 12, React 18, TailwindCSS |
+| Backend | Next.js API Routes (serverless) |
+| Database | MongoDB (via Mongoose) |
+| Auth | JWT, crypto-js |
+| Payments | Stripe, react-stripe-checkout |
+| Deployment | Vercel |
+
+---
+
+## 📁 Project Structure
+
 ```
 NextShop/
-├── frontend/          # Next.js frontend
-│   ├── pages/        # Application pages
-│   ├── components/   # Reusable components
-│   └── public/       # Static assets
-└── backend/           # Node.js backend
-    ├── models/       # Database models
-    ├── routes/       # API routes
-    └── config/       # Configurations for database and server
+├── components/        # Reusable UI components
+├── middleware/        # Auth & request middleware
+├── models/            # Mongoose data models
+├── pages/
+│   ├── api/           # Serverless API routes
+│   └── ...            # App pages (SSR)
+├── public/            # Static assets
+├── styles/            # Global styles
+├── next.config.js
+└── tailwind.config.js
 ```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js >= 16
+- MongoDB URI
+- Stripe API keys
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Kunal0007/NextShop.git
+cd NextShop
+
+# Install dependencies
+npm install
+# or
+yarn install
+```
+
+### Environment Variables
+
+Create a `.env.local` file in the root:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+```
+
+### Run Locally
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## 🌐 Deployment
+
+This project is deployed on **Vercel**. To deploy your own instance:
+
+1. Push your code to GitHub
+2. Import the repo on [vercel.com](https://vercel.com)
+3. Add your environment variables in the Vercel dashboard
+4. Deploy 🚀
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
