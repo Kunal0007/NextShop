@@ -109,7 +109,3 @@ This project is deployed on **Vercel**. To deploy your own instance:
 2. Import the repo on [vercel.com](https://vercel.com)
 3. Add your environment variables in the Vercel dashboard
 4. Deploy 🚀
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
